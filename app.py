@@ -10,7 +10,8 @@ import Recommender as rc
 app = Flask(__name__)
 api = Api(app)
 
-es = Elasticsearch()
+host = 'http://smartchef.eastus.cloudapp.azure.com'
+es = Elasticsearch(hosts=[host])
 
 
 class Test(Resource):
@@ -45,6 +46,14 @@ class ContentCreator(Resource):
                     print(ids)
                     for id in ids:
                         recipe['recommentions'].append(id)
+                        # query_body = {
+                        #     "query": {
+                        #         "match": {
+                        #             "some_field": "search_for_this"
+                        #         }
+                        #     }
+                        # }
+                        # print(es.search(index="some_index", body=query_body))
 
         return jsonify(emailRequest=email_request)
 
