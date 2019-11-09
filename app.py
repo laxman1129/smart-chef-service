@@ -7,6 +7,10 @@ import Recommender as rc
 app = Flask(__name__)
 api = Api(app)
 
+class Test(Resource):
+    def get(self):
+        return 'connection successful'
+
 
 class ContentCreator(Resource):
     def post(self):
@@ -33,6 +37,7 @@ class ContentCreator(Resource):
         return jsonify(emailRequest=email_request)
 
 
+api.add_resource(Test, '/')
 api.add_resource(ContentCreator, '/menu')
 
 if __name__ == '__main__':
