@@ -143,8 +143,16 @@ def get_closest_match(search, terms=keywords, count=10):
 def get_titles(items):
     return [list(titles)[x] for x in items]
 
+
+def get_id(items):
+    return [list(indices)[list(titles).index(x)] for x in items]
+
 # searches = get_closest_match('lamb garlic fennel biryani', keywords)
 # print(searches)
 # print(list(titles))
 #
 # print([list(titles)[x] for x in searches])
+
+# list(titles).index('Ratatouille')
+
+

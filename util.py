@@ -25,3 +25,8 @@
 #             ingredients = ' '.join(recipe['ingredients'])
 #             recipe_keywords = route + ' ' + name + ' ' + title + ' ' + ingredients
 #             print(recipe_keywords)
+
+
+# import requests
+#
+# print(requests.get('http://0.0.0.0:5000').content)

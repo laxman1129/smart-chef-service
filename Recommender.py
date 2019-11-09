@@ -4,9 +4,7 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 # Import linear_kernel
 from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
-import seaborn as ssn
 
-ssn.set()
 
 
 def pre_process(text):
