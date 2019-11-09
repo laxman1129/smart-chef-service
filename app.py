@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
+from flask_cors import CORS, cross_origin
 
 from elasticsearch import Elasticsearch
 
@@ -13,11 +14,13 @@ es = Elasticsearch()
 
 
 class Test(Resource):
+    @cross_origin()
     def get(self):
         return 'connection successful'
 
 
 class ContentCreator(Resource):
+    @cross_origin()
     def post(self):
         json_data = request.get_json(force=True)
         email_request = json_data['emailRequest']
@@ -38,7 +41,10 @@ class ContentCreator(Resource):
                     titles = fs.get_titles(indexes)
                     recommendations = rc.get_recommendations(titles[0])
                     recommendation_list = list(recommendations)
-                    print(fs.get_id(recommendation_list))
+                    ids = fs.get_id(recommendation_list)
+                    print(ids)
+                    for id in ids:
+                        recipe['recommentions'].append(id)
 
         return jsonify(emailRequest=email_request)
 
