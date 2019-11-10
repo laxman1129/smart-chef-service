@@ -30,3 +30,10 @@
 # import requests
 #
 # print(requests.get('http://0.0.0.0:5000').content)
+
+# import json
+#
+# with open("data/x.json", "rb") as jfile:
+#     jsonstr = jfile.read()
+#     data = json.loads(jsonstr)
+#     print(data)

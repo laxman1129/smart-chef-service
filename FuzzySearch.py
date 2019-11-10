@@ -4,72 +4,21 @@ from fuzzywuzzy import fuzz
 import re
 from nltk.corpus import stopwords
 import collections
+import pickle
+import os.path
 
-# class FuzzySearch:
-#     def __init__(self):
-#         self.data = pd.read_json('data/all_meals.json')
-#         self.data = self.data.transpose()
-#         self.parser = spacy.load("en_core_web_sm")
-#         self.indices = self.data['id']
-#         self.titles = self.data['title'].fillna('')
-#         self.ingredients = self.data['ingredients'][:].fillna('')
-#         self.category = self.data['category'].fillna('')
-#         self.area = self.data['area'].fillna('')
-#         self.tags = self.data['tags'].fillna('')
-#         self.keywords = self.populate_keywords()
-#         self.score_index_dict = collections.defaultdict(list)
-#
-#     def populate_keywords(self):
-#         tokens = []
-#         for i in range(0, len(self.titles)):
-#             token = (list(self.titles)[i]) + ' ' + (' '.join((list(self.ingredients)[i]))) + ' ' + list(self.category)[
-#                 i] + ' ' + \
-#                     list(self.area)[
-#                         i] + ' ' + list(self.tags)[i]
-#             tokens.append(token)
-#             return tokens
-#
-#     @staticmethod
-#     def pre_process(text):
-#         if not text:
-#             return ''
-#         # remove special characters and digits
-#         text = re.sub("(\\d|\\W)+", " ", text)
-#         word_list = text.split()
-#         filtered_words = [word for word in word_list if word not in stopwords.words('english')]
-#         text = ' '.join(filtered_words)
-#         return text.strip()
-#
-#     def term_tokenizer(self, terms):
-#         terms = self.pre_process(terms)
-#         terms = self.parser(terms)
-#         terms = [word.lemma_.lower().strip() for word in terms]
-#         return ' '.join(terms)
-#
-#     def get_ratio(self, search):
-#         for item in self.keywords:
-#             print(item, self.term_tokenizer(item))
-#             ratio = fuzz.token_set_ratio(search, self.term_tokenizer(item))
-#             # print(terms.index(item), ratio)
-#             # score_index_dict.setdefault(ratio, [])
-#             # score_index_dict[ratio].append(terms.index(item))
-#             self.score_index_dict[ratio].append(self.keywords.index(item))
-#
-#     def get_closest_match(self, search):
-#         self.get_ratio(search)
-#         sorted_keys = list(self.score_index_dict.keys())
-#         sorted_keys.sort()
-#         sorted_keys.reverse()
-#
-#         # return self.score_index_dict[sorted_keys[0]]
-#
-#
-# obj = FuzzySearch()
-# print(obj.get_closest_match('lamb garlic'))
-# print(obj.keywords)
-
-data = pd.read_json('data/all_meals.json')
-data = data.transpose()
+if os.path.exists('data/datafile.pickle'):
+    infile = open('data/datafile.pickle', 'rb')
+    data = pickle.load(infile)
+    infile.close()
+    print('read')
+else:
+    data = pd.read_json('data/all_meals.json')
+    data = data.transpose()
+    outfile = open('data/datafile.pickle', 'wb')
+    pickle.dump(data, outfile)
+    outfile.close()
+    print('write')
 
 parser = spacy.load("en_core_web_sm")
 
@@ -154,5 +103,3 @@ def get_id(items):
 # print([list(titles)[x] for x in searches])
 
 # list(titles).index('Ratatouille')
-
-
