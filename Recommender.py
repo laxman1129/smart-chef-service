@@ -33,7 +33,7 @@ metadata = metadata.transpose()
 metadata.reset_index(inplace=True)
 metadata.index = range(len(metadata))
 
-# Construct a reverse map of indices and movie titles
+# Construct a reverse map of indices and recipe titles
 title_indices = pd.Series(metadata.index, index=metadata['title']).drop_duplicates()
 
 # Apply clean_data function to your features.
@@ -51,43 +51,28 @@ count_matrix2 = tfidf.fit_transform(metadata['soup'])
 cosine_sim2 = cosine_similarity(count_matrix2, count_matrix2)
 
 
-# Function that takes in movie title as input and outputs most similar movies
-def get_recommendations(inp, search_indices=title_indices, search_cosine_sim=cosine_sim2, search_metadata=metadata):
-    # Get the index of the movie that matches the title
+# Function that takes in movie title as input and outputs most similar recipes
+def get_recommendations(inp, search_indices=title_indices, search_cosine_sim=cosine_sim2, search_metadata=metadata, count=10):
+    # Get the index of the recipe that matches the title
     # print(inp)
     idx = search_indices[inp]
     # print('idx', idx)
 
     # print(len(cosine_sim))
 
-    # Get the pairwsie similarity scores of all movies with that movie
+    # Get the pairwsie similarity scores of all recipes with that recipe
     sim_scores = list(enumerate(search_cosine_sim[idx]))
     #     sim_scores = list(enumerate(cosine_sim[0]))
 
-    # Sort the movies based on the similarity scores
+    # Sort the recipe based on the similarity scores
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
 
-    # Get the scores of the 10 most similar movies
-    sim_scores = sim_scores[1:11]
+    # Get the scores of the 10 most similar recipes
+    sim_scores = sim_scores[0:count]
 
-    # Get the movie indices
+    # Get the recipe indices
     meal_indices = [i[0] for i in sim_scores]
 
-    # Return the top 10 most similar movies
+    # Return the top 10 most similar recipes
     return search_metadata['title'].iloc[meal_indices]
 
-
-# metadata['instructions'] = metadata['instructions'].fillna('')
-# # Construct the required TF-IDF matrix by fitting and transforming the data
-# tfidf_matrix = tfidf.fit_transform(metadata['instructions'])
-#
-# # Compute the cosine similarity matrix
-# cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
-
-
-# count = CountVectorizer(stop_words='english')
-# count_matrix1 = count.fit_transform(metadata['soup'])
-# cosine_sim1 = cosine_similarity(count_matrix1, count_matrix1)
-
-# print(get_recommendations('Kung Po Prawns', title_indices, cosine_sim1, metadata))
-# print(get_recommendations('Kung Po Prawns', title_indices, cosine_sim2, metadata))

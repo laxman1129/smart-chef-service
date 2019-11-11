@@ -1,5 +1,6 @@
 aniso8601
 blis
+bs4
 certifi
 chardet
 Click

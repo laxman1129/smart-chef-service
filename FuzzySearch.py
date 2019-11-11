@@ -82,11 +82,11 @@ def get_closest_match(search, terms=keywords, count=10):
     sorted_keys.reverse()
     search_indices = []
     i = 0;
-    while len(search_indices) <= 10:
+    while len(search_indices) <= count:
         search_indices.extend(score_index_dict[sorted_keys[i]])
         i = i + 1
 
-    return search_indices[0:count]
+    return search_indices[0:count+1]
 
 
 def get_titles(items):
@@ -96,10 +96,3 @@ def get_titles(items):
 def get_id(items):
     return [list(indices)[list(titles).index(x)] for x in items]
 
-# searches = get_closest_match('lamb garlic fennel biryani', keywords)
-# print(searches)
-# print(list(titles))
-#
-# print([list(titles)[x] for x in searches])
-
-# list(titles).index('Ratatouille')

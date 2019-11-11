@@ -67,3 +67,14 @@
 #
 # f = open('data/new_recipe.json', 'w')
 # json.dump({'recipes': d['recipes']}, f)
+
+# import requests
+# import json
+
+# # url = "https://smartchef.eastus.cloudapp.azure.com:9200/recipe-index/recipe/52981"
+# url = 'https://smartchef.eastus.cloudapp.azure.com:9200/recipe-index/_doc/52984'
+# j52981 = open('data/52984.json', 'r')
+# d52981 = json.loads(j52981.read())
+# headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+# response = requests.post(url, data=json.dumps(d52981), headers=headers, verify=False)
+# print(response.json())
