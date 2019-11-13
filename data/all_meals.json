@@ -4481,5 +4481,37 @@
       "onion",
       "cauliflower"
     ]
+  },
+  "52985": {
+    "id": "52985",
+    "title": "Indian Raita",
+    "category": "vegetarian",
+    "area": "India",
+    "instructions": "Mix all ingredients in medium bowl. Season to taste with salt. Chill raita, covered, until ready to serve.",
+    "tags": "Lunch, veg",
+    "ingredients": [
+      "plain curd",
+      "chopped seeded English hothouse cucumber",
+      "chopped fresh cilantro",
+      "chopped green onions",
+      "ground coriander",
+      "ground cumin"
+    ]
+  },
+  "52986": {
+    "id": "52986",
+    "title": "Indian Raita",
+    "category": "vegetarian",
+    "area": "India",
+    "instructions": "In a skillet add the canola oil and heat on high heat. Add in the cumin seeds and cook for 15-20 seconds. In a medium bowl mix all the ingredients together including the cumin seeds and refrigerate for at least 1 hour before serving.",
+    "tags": "Lunch, veg",
+    "ingredients": [
+      "Curd",
+      "Carrot",
+      "chopped fresh cilantro",
+      "Onion",
+      "ground coriander",
+      "Green chili"
+    ]
   }
 }
